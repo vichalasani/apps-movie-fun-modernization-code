@@ -1,5 +1,8 @@
 buildscript {
     ext {
+        springCloudVersion = "Camden.SR3"
+        springCloudSsoVersion = "1.1.0.RELEASE"
+        springSecurityVersion = "4.1.3.RELEASE"
         springBootVersion = "1.4.2.RELEASE"
         springVersion = "4.3.4.RELEASE"
         hibernateVersion = "5.0.11.Final"
@@ -66,8 +69,8 @@ task deploy {
 task setupPcfEnv {
     doLast {
         [
-            "cf create-service p-mysql 100mb movie-database",
-            "cf create-service p-mysql 100mb album-database",
+            "cf create-service p-mysql p-mysql movie-database",
+            "cf create-service p-mysql p-mysql album-database",
         ].each { println it.execute().text }
     }
 }

@@ -4,14 +4,30 @@ instances: 1
 applications:
 - name: album-service
   path: applications/album-service/build/libs/album-service-1.1.0-SNAPSHOT.jar
+  routes:
+  - route: album-service-vc.apps.longs.pal.pivotal.io
   services:
   - album-database
+  - movie-fun-sso
+  - moviefun-s3
+  env:
+    GRANT_TYPE: client_credentials
 - name: movie-service
   path: applications/movie-service/build/libs/movie-service-1.1.0-SNAPSHOT.jar
+  routes:
+  - route: movie-service-vc.apps.longs.pal.pivotal.io
   services:
   - movie-database
+  - movie-fun-sso
+  env:
+    GRANT_TYPE: client_credentials
 - name: movie-fun-app
   path: applications/movie-fun-app/build/libs/movie-fun-app-1.1.0-SNAPSHOT.war
+  services:
+  - movie-fun-sso
+  - moviefun-s3
   env:
-    ALBUMS_URL: http://album-service.cfapps-02.haas-66.pez.pivotal.io/albums
-    MOVIES_URL: http://movie-service.cfapps-02.haas-66.pez.pivotal.io/movies
+    ALBUMS_URL: http://album-service-vc.apps.longs.pal.pivotal.io/albums
+    MOVIES_URL: http://movie-service-vc.apps.longs.pal.pivotal.io/movies
+  routes:
+  - route: movie-fun-app-vc.apps.longs.pal.pivotal.io
