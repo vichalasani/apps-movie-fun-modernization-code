@@ -4,6 +4,7 @@ dependencies {
     compile project(":components:blobstore")
 
     compile "org.springframework:spring-web:$springVersion"
+    compile "org.springframework.cloud:spring-cloud-context:1.1.6.RELEASE"
 
     compile "javax.servlet:javax.servlet-api:3.1.0"
     compile "org.slf4j:slf4j-api:$slf4jVersion"

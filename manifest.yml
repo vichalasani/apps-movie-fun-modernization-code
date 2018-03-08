@@ -7,15 +7,25 @@ services:
 applications:
 - name: album-service
   path: applications/album-service/build/libs/album-service-1.1.0-SNAPSHOT.jar
+  routes:
+  - route: album-service-vc.apps.longs.pal.pivotal.io
   services:
   - album-database
+  - moviefun-s3
   env:
     GRANT_TYPE: client_credentials
 - name: movie-service
   path: applications/movie-service/build/libs/movie-service-1.1.0-SNAPSHOT.jar
+  routes:
+  - route: movie-service-vc.apps.longs.pal.pivotal.io
   services:
   - movie-database
   env:
     GRANT_TYPE: client_credentials
 - name: movie-fun-app
   path: applications/movie-fun-app/build/libs/movie-fun-app-1.1.0-SNAPSHOT.war
+  services:
+  - moviefun-s3
+  - movie-fun-config
+  routes:
+  - route: movie-fun-app-vc.apps.longs.pal.pivotal.io
